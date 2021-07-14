@@ -1,0 +1,14 @@
+.messages {
+  padding: 1% 0;
+  overflow: auto;
+  flex: auto;
+  position: absolute;
+  width: 75%;
+  right: 0;
+  height: 90%;
+}
+@media screen and (max-width: 620px){
+  .messages{
+    width: 100%;
+  }
+}

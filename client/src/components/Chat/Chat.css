@@ -1,0 +1,73 @@
+.chatContainer {
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFFFF;
+  width: 90%;
+  height: 90%;
+  position: fixed;
+  left: 5%;
+  top: 5%;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px 0 rgb(70 69 69 / 30%);
+  z-index: 10;
+}
+.mobileHeader{
+  display: none;
+}
+@media screen and (max-width: 1024px){
+  .chatContainer{
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 10;
+  }
+  .mobileHeader{
+    display: none;
+  }
+}
+@media screen and (max-width: 620px){
+  .chatContainer{
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 10;
+  }
+  .mobileHeader{
+    display: block;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+    height: 5%;
+    margin-bottom: 10px;
+  }
+  .listIcon {
+    content: url("../../assets/list.png");
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 2%;
+  }
+  .logoutIcon{
+    content: url('../../assets/logout.png');
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 2%;
+  }
+}

@@ -1,0 +1,99 @@
+html, body {
+  font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+.loginContainer {
+  display: flex;
+  height: 100%;
+  background-color: white;
+}
+.leftContainer {
+  left: 5%;
+  position: absolute;
+  background: white;
+  top: 50%;
+  width: 25%;
+  transform: translate(0,-50%);
+}
+.rightContainer{
+  background-image: url(../../assets/backgound.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 65%;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.logo {
+  content: url(../../assets/A3Logo.jpg);
+  height: 50%;
+  width: 50%;
+}
+.inputTextbox {
+  border: solid .1rem #A9A9A9;
+  border-radius: .5rem;
+  padding: 15px 20px;
+  width: 100%;
+}
+.heading {
+  color: black;
+  font-size: 1.5em;
+  padding-bottom: 15px;
+}
+.loginButton {
+  color: #fff !important;
+  background-color: #003E75;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  transition: .3s;
+  cursor: pointer;
+  margin-top: 35px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+@media screen and (max-width: 1024px){
+  .leftContainer{
+    left: 10%;
+    position: absolute;
+    top: 50%;
+    width: 80%;
+    transform: translate(0,-50%);
+    z-index: 10;
+    border-radius: 10px;
+    padding: 20px 25px;
+    background-color: white;
+  }
+  .rightContainer{
+    left: 0;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 620px){
+  .leftContainer{
+    left: 5%;
+    position: absolute;
+    top: 50%;
+    width: 90%;
+    transform: translate(0,-50%);
+    z-index: 10;
+    border-radius: 10px;
+    padding: 20px 10px;
+    background-color: white;
+  }
+  .rightContainer{
+    left: 0;
+    width: 100%;
+  }
+}

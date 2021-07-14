@@ -1,0 +1,42 @@
+.sendMessageForm {
+  display: flex;
+  border-top: 2px solid #D3D3D3;
+  position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 75%;
+    height: 10%;
+}
+.sendMessageForm input {
+  border: none;
+  width: 80%;
+  font-size: 1.2em;
+  height: 100%;
+  padding: 30px;
+}
+.sendMessageForm input:focus {
+  outline:none;
+}
+.sendMessageButton {
+  color: #fff !important;
+  background: #003E75;
+  display: inline-block;
+  border: none;
+  width: 20%;
+  border-bottom-right-radius: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+@media screen and (max-width: 620px){
+  .sendMessageForm{
+    width: 100%;
+  }
+  .sendMessageButton{
+    border-bottom-right-radius: 0;
+  }
+}
+@media screen and (max-width: 1024px){
+  .sendMessageButton{
+    border-bottom-right-radius: 0;
+  }
+}
