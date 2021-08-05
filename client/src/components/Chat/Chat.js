@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import queryString from 'query-string';
-import io from "socket.io-client";
-import Messages from '../Messages/Messages';
-import InfoBar from '../InfoBar/InfoBar';
-import Input from '../Input/Input';
+import { InfoBar, Messages, Input } from "../../index";
+import { socket } from '../../config/web-socket';
 import './Chat.css';
-
-const ENDPOINT = 'https://a3chat.herokuapp.com/';
-let socket;
 
 const Chat = ({ location }) => {
   const [name, setName] = useState('');
@@ -17,9 +11,9 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([]);
   const [showInfoBar, setShowInfoBar] = useState(true);
   const toogleInfoBar = () => setShowInfoBar(!showInfoBar);
+
   useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
-    socket = io(ENDPOINT);
+    const { name, room } = location.state;
     setRoom(room);
     setName(name)
     socket.emit('join', { name, room }, (error) => {
@@ -27,7 +21,7 @@ const Chat = ({ location }) => {
         alert(error);
       }
     });
-  }, [ENDPOINT, location.search]);
+  }, [location.state]);
 
   useEffect(() => {
     socket.on('message', message => {
@@ -44,7 +38,7 @@ const Chat = ({ location }) => {
     if (message) {
       socket.emit('sendMessage', message, () => setMessage(''));
     }
-  }
+  };
 
   return (
     <div className="chatContainer">

@@ -1,11 +1,3 @@
-html, body {
-  font-family: 'Poppins', sans-serif;
-  padding: 0;
-  margin: 0;
-}
-* {
-  box-sizing: border-box;
-}
 .loginContainer {
   display: flex;
   height: 100%;
@@ -37,8 +29,13 @@ html, body {
 .inputTextbox {
   border: solid .1rem #A9A9A9;
   border-radius: .5rem;
-  padding: 15px 20px;
+  padding: 1rem;
   width: 100%;
+  font-size: 1rem;
+}
+.inputTextbox:focus {
+  border: solid .1rem #003E75;
+  outline: none;
 }
 .heading {
   color: black;
@@ -51,11 +48,12 @@ html, body {
   display: inline-block;
   border: none;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   border-radius: .5rem;
   transition: .3s;
   cursor: pointer;
   margin-top: 35px;
+  font-size: 1.2rem;
 }
 .mt-10 {
   margin-top: 10px;
