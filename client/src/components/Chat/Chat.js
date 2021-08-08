@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { InfoBar, Messages, Input } from "../../index";
-import { socket } from '../../config/web-socket';
+import { useHistory } from 'react-router-dom';
+import { InfoBar, Messages, Input, socket } from "../../index";
+import { FiMenu, FiLogOut } from 'react-icons/fi';
 import './Chat.css';
 
 const Chat = ({ location }) => {
+  let history = useHistory();
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [showInfoBar, setShowInfoBar] = useState(true);
-  const toogleInfoBar = () => setShowInfoBar(!showInfoBar);
 
   useEffect(() => {
     const { name, room } = location.state;
     setRoom(room);
     setName(name)
-    socket.emit('join', { name, room }, (error) => {
+    socket.emit('welcome', { name, room }, (error) => {
       if (error) {
-        alert(error);
+        doLogout();
       }
     });
   }, [location.state]);
@@ -40,11 +41,18 @@ const Chat = ({ location }) => {
     }
   };
 
+  const toggleInfoBar = () => setShowInfoBar(!showInfoBar);
+
+  const doLogout = () => {
+    socket.disconnect(true);
+    history.push('/');
+  };
+
   return (
     <div className="chatContainer">
       <div className="mobileHeader">
-        <img className="listIcon" onClick={toogleInfoBar}></img>
-        <a href="/"><img className="logoutIcon"></img></a>
+        <div onClick={toggleInfoBar}><FiMenu /></div>
+        <div onClick={doLogout}><FiLogOut /></div>
       </div>
       {showInfoBar ? (<InfoBar room={room} users={users} />) : null}
       <Messages messages={messages} name={name} />

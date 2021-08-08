@@ -1,41 +1,70 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { socket } from '../../index';
+import { FiLogOut } from 'react-icons/fi';
+import { CgSearch, CgProfile } from 'react-icons/cg';
+import { RiCloseFill } from 'react-icons/ri';
 import './InfoBar.css';
 
-const InfoBar = ({ room, users }) => {
+export default function InfoBar({ room, users }) {
+  let history = useHistory();
+  const [search, setSearch] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [showInfoBar, setShowInfoBar] = useState(true);
-  const toogleInfoBar = () => setShowInfoBar(!showInfoBar);
+
+  useEffect(() => {
+    if (search === '') {
+      setFilteredUsers(users);
+    }
+  });
+
+  const toggleInfoBar = () => setShowInfoBar(!showInfoBar);
+
+  const onInput = value => {
+    setSearch(value);
+    let filteredUsersData = [];
+    users.forEach(user => {
+      if (user.name.toLowerCase().includes(value.toLowerCase()))
+        filteredUsersData.push(user);
+    });
+    setFilteredUsers(filteredUsersData);
+  };
+
+  const doLogout = () => {
+    socket.disconnect(true);
+    history.push('/');
+  };
+
   return (
-    showInfoBar ? (
-      <div className="infoBar">
-        <div className="roomContainer">
-          <span>Room: {room}</span>
-        </div>
-        <div className="closeIcon" onClick={toogleInfoBar}>
-          <img></img>
-        </div>
-        <div className="usersContainer">
-          <span>Users Online:</span>
-          {
-            users
-              ? (
-                <div className="usersList">
-                  <ul>
-                    {users.map(({ name }) => (
-                      <li key={name}>
-                        {name}
-                      </li>
-                    ))}
-                  </ul>
+    showInfoBar
+      ? (
+        <div className="infoBar">
+          <div className="roomContainer">
+            <span>Room: {room}</span>
+            <div onClick={doLogout}><FiLogOut /></div>
+            <div onClick={toggleInfoBar}><RiCloseFill /></div>
+          </div>
+          <div className="searchContainer">
+            <CgSearch/>
+            <input type="text" name="search" value={search} placeholder="Search by name" autoComplete="off"
+              onChange={event => onInput(event.target.value)}
+              onFocus={event => onInput(event.target.value)}
+            />
+          </div>
+          <div className="usersList">
+            {
+              filteredUsers && filteredUsers.map(({ name }) => (
+                <div>
+                  <CgProfile />
+                  <div>
+                    <span key={name}>{name}</span>
+                    <span>Online</span>
+                  </div>
                 </div>
-              )
-              : null
-          }
-        </div>
-        <div className="signOutContainer">
-          <a href="/">Sign Out</a>
-        </div>
-      </div>) : null
+              ))
+            }
+          </div>
+        </div>)
+      : null
   )
 };
-
-export default InfoBar;

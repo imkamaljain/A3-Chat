@@ -27,33 +27,45 @@ io.on('connect', (socket) => {
         } else {
           callback(`User '${name}' already exists in room '${room}'. Please select a different name or room.`);
         }
+        return;
       } else {
         const user = await userController.addUser({ _id: socket.id, name, room });
         if (user && !user.err) {
           socket.join(user.room);
-          socket.emit('message', {
-            user: 'Admin',
-            text: `${user.name}, Welcome to room ${user.room}.`
-          });
-          socket.broadcast.to(user.room).emit('message', {
-            user: 'Admin',
-            text: `${user.name} has joined`,
-          });
-          const users = await userController.getUsersInRoom({ room: user.room });
-          if (!users.err) {
-            io.to(user.room).emit('roomData', {
-              room: user.room,
-              users
-            });
-          }
         } else {
           callback(user.err);
+          return;
         }
       }
       callback();
     } catch (err) {
       callback(`Unable to add user at this moment. Please try again!`);
     }
+  });
+  socket.on('welcome', async ({ name, room }, callback) => {
+    const user = await userController.findUser({ name, room });
+    if (!user || user.err) {
+      callback('Something went wrong.');
+      return;
+    }
+    socket.emit('message', {
+      user: 'Admin',
+      text: `${name}, Welcome to room ${room}.`
+    });
+    socket.broadcast.to(room).emit('message', {
+      user: 'Admin',
+      text: `${name} has joined`,
+    });
+    const users = await userController.getUsersInRoom({ room });
+    if (!users || users.length < 0 || user.err) {
+      callback('Something went wrong.');
+      return;
+    }
+    io.to(room).emit('roomData', {
+      room,
+      users
+    });
+    callback();
   });
   socket.on('sendMessage', async (message, callback) => {
     const user = await userController.getUser({ _id: socket.id });

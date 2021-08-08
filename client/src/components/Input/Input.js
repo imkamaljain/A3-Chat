@@ -1,8 +1,9 @@
 import React from 'react';
 import './Input.css';
+import { IoSend } from 'react-icons/io5';
 
 const Input = ({ setMessage, sendMessage, message }) => (
-  <form className="sendMessageForm">
+  <div className="inputContainer">
     <input
       type="text"
       placeholder="Type a message..."
@@ -10,8 +11,10 @@ const Input = ({ setMessage, sendMessage, message }) => (
       onChange={({ target: { value } }) => setMessage(value)}
       onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
     />
-    <button className="sendMessageButton" onClick={e => sendMessage(e)}>Send</button>
-  </form>
+    <div onClick={e => sendMessage(e)}>
+      <IoSend />
+    </div>
+  </div>
 )
 
 export default Input;

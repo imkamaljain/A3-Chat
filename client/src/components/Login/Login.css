@@ -29,9 +29,8 @@
 .inputTextbox {
   border: solid .1rem #A9A9A9;
   border-radius: .5rem;
-  padding: 1rem;
+  padding: 0.75rem;
   width: 100%;
-  font-size: 1rem;
 }
 .inputTextbox:focus {
   border: solid .1rem #003E75;

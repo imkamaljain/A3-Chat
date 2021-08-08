@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import { socket } from '../../index';
 import './Login.css';
 
 export default function Login() {
@@ -23,9 +24,16 @@ export default function Login() {
       alert('Please enter all required fields.');
       return;
     }
-    history.push({
-      pathname: '/chat',
-      state: user
+    socket.connect();
+    socket.emit('join', { name, room }, (error) => {
+      if (error) {
+        alert(error);
+      } else {
+        history.push({
+          pathname: '/chat',
+          state: user
+        });
+      }
     });
   };
 
@@ -36,13 +44,13 @@ export default function Login() {
         <h1 className="heading">Welcome to A3 Chat</h1>
         <div>
           <label htmlFor="username">Username:</label>
-          <input type="text" name="name" placeholder="Username" className="inputTextbox mt-10" maxLength="20"
+          <input type="text" name="name" placeholder="Username" className="inputTextbox mt-10" maxLength="15"
             onChange={handleChange}
             onKeyPress={event => event.key === 'Enter' ? doLogin() : null} />
         </div>
         <div className="mt-20">
           <label htmlFor="room">Room:</label>
-          <input type="text" name="room" placeholder="Room" className="inputTextbox mt-10" maxLength="20"
+          <input type="text" name="room" placeholder="Room" className="inputTextbox mt-10" maxLength="15"
             onChange={handleChange}
             onKeyPress={event => event.key === 'Enter' ? doLogin() : null} />
         </div>

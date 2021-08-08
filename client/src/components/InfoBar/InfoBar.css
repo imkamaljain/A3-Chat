@@ -1,28 +1,31 @@
 .infoBar {
   background: #003E75;
   height: 100%;
-  width: 25%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  width: 30%;
   position: absolute;
-  box-shadow: 0 2px 10px 0 rgb(70 69 69 / 20%);
   color: white;
   font-weight: 600;
   font-size: 1.5em;
+  overflow: hidden;
 }
 .roomContainer {
-  margin-top: 6%;
-  margin-left: 5%;
+  display: flex;
+  justify-content: space-between;
+  margin: 5% 5% 0;
 }
-.usersContainer {
-  margin-top: 5%;
-  margin-left: 5%;
+.roomContainer div {
+  display: block;
+  cursor: pointer;
+}
+.roomContainer div:last-child {
+  display: none;
 }
 .usersList{
+  margin-left: 5%;
   font-size: 1em;
   position: absolute;
   overflow-y: auto;
-  height: 75%;
+  height: 80%;
   width: 94%;
 }
 .usersList::-webkit-scrollbar {
@@ -35,48 +38,72 @@
   background-color: darkgrey;
   border-radius: 20px;
 }
-.usersList ul{
-  margin: 0;
+.usersList > div {
+  display: flex;
+  width: 94%;
+  margin-top: 0.5rem;
+  border-bottom: solid 1px;
+  font-size: 2.5rem;
 }
-.signOutContainer{
+.usersList > div:first-child {
+  margin-top: 0;
+}
+.usersList > div:last-child {
+  border-bottom: none;
+}
+.usersList > div div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.usersList > div div span:first-child {
+  font-size: 1.5rem;
+}
+.usersList > div div span:last-child {
+  font-size: 0.8rem;
+}
+.searchContainer {
+  display: flex;
+  margin: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+.searchContainer svg {
   position: absolute;
-  bottom: 4%;
-  left: 5%;
+  right: 2rem;
+  cursor: pointer;
 }
-.signOutContainer a{
-  text-decoration: none;
-  color: white;
+.searchContainer > input {
+  width: 100%;
+  height: 2.5rem;
+  padding: 1.5rem;
+  border: none;
+  border-radius: 2rem;
 }
-.closeIcon{
-  display: none;
-}
-.closeIcon img{
-  content: url('../../assets/close.png');
+input:focus {
+  outline: none;
 }
 @media screen and (max-width: 1024px){
   .infoBar{
     border-radius: 0;
     box-shadow: none;
   }
-  .closeIcon{
-    display: none;
-  }
 }
 @media screen and (max-width: 620px){
   .infoBar{
     z-index: 10;
-    width: 85%;
-    border-radius: 0;
-    box-shadow: none;
+    width: 90%;
     top: 0;
   }
-  .closeIcon{
-    display: block;
-    position: absolute;
-    right: 5%;
-    top: 2%;
-  }
-  .signOutContainer a{
+  .roomContainer div {
     display: none;
+  }
+  .roomContainer div:last-child {
+    display: block;
+  }
+  .usersList {
+    height: 85%;
   }
 }

@@ -3,9 +3,10 @@
   overflow: auto;
   flex: auto;
   position: absolute;
-  width: 75%;
+  width: 70%;
   right: 0;
   height: 90%;
+  background: #e3e3e3;
 }
 .messages::-webkit-scrollbar {
   width: 8px;
