@@ -1,55 +1,42 @@
 .messageContainer {
   display: flex;
-  justify-content: flex-end;
   padding: 0 2%;
-  margin-top: 3px;
+  margin: 0.5rem 0;
 }
-.messageBox {
-  background: #F3F3F3;
-  border-radius: 20px;
-  padding: 0 20px;
-  color: white;
+.messageContainer div {
   display: inline-block;
+  border-radius: 20px;
   max-width: 80%;
+  padding: 0.5rem 1rem;
 }
-.messageText {
+.messageContainer p {
   width: 100%;
   letter-spacing: 0;
   float: left;
   font-size: 1.1em;
   word-wrap: break-word;
+  margin: 0;
 }
-.messageText img {
-  vertical-align: middle;
-}
-.sentText {
-  display: flex;
-  align-items: center;
-  font-family: Helvetica;
-  color: #828282;
-  letter-spacing: 0.3px;
-}
-.pl-10 {
-  padding-left: 10px;
-}
-.pr-10 {
-  padding-right: 10px;
-}
-.justifyStart {
-  justify-content: flex-start;
-}
-.justifyEnd {
+.currentUser {
   justify-content: flex-end;
 }
-.colorWhite {
-  color: white;
-}
-.colorDark {
-  color: #353535;
-}
-.backgroundBlue {
+.currentUser div {
   background: #003E75;
+  border-bottom-right-radius: 0;
 }
-.backgroundLight {
+.currentUser p {
+  color: #fff
+}
+.otherUser {
+  justify-content: flex-start;
+}
+.otherUser div {
   background: #F3F3F3;
+  border-bottom-left-radius: 0;
+}
+.otherUser p:first-child {
+  color: hsl(0, 0%, 40%);
+}
+.otherUser p:last-child {
+  color: hsl(0, 0%, 0%);
 }

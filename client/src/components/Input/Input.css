@@ -5,14 +5,15 @@
   right: 0;
   width: 70%;
   height: 10%;
-  background: #e3e3e3;
+  padding: 0 1rem;
 }
 .inputContainer input {
   border: solid 2px #003e75;
   width: 100%;
   border-radius: 2rem;
   height: 100%;
-  padding: 30px;
+  padding: 1.5rem;
+  padding-right: 5rem;
 }
 .inputContainer input:focus {
   outline:none;
@@ -29,9 +30,8 @@
   font-size: 3em;
   cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 0.5rem;
   height: 100%;
-  
 }
 @media screen and (max-width: 620px){
   .inputContainer{
@@ -43,6 +43,7 @@
   .inputContainer input {
     border-radius: 1rem;
     padding: 1rem;
+    padding-right: 3rem;
   }
   .inputContainer div {
     font-size: 2rem;

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Input.css';
-import { IoSend } from 'react-icons/io5';
+import { AiOutlineSend } from 'react-icons/ai';
 
 const Input = ({ setMessage, sendMessage, message }) => (
   <div className="inputContainer">
@@ -12,7 +12,7 @@ const Input = ({ setMessage, sendMessage, message }) => (
       onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
     />
     <div onClick={e => sendMessage(e)}>
-      <IoSend />
+      <AiOutlineSend />
     </div>
   </div>
 )
