@@ -10,5 +10,6 @@ export { default as Login } from './components/Login/Login';
 export { default as Messages } from './components/Messages/Messages';
 export { default as Message } from './components/Messages/Message/Message';
 export { default as socket } from './config/web-socket';
+export { default as Loader } from './components/Loader/Loader';
 
 ReactDOM.render(<App />, document.getElementById('root'));

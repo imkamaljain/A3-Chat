@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { InfoBar, Messages, Input, socket } from "../../index";
+import { InfoBar, Messages, Input, socket, Loader } from '../../index';
 import { FiMenu, FiLogOut } from 'react-icons/fi';
 import './Chat.css';
 
@@ -32,6 +32,14 @@ const Chat = ({ location }) => {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
+
+    setShowInfoBar(window.innerWidth > 620);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setShowInfoBar(window.innerWidth > 620);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const sendMessage = (event) => {
@@ -49,15 +57,18 @@ const Chat = ({ location }) => {
   };
 
   return (
-    <div className="chatContainer">
-      <div className="mobileHeader">
-        <div onClick={toggleInfoBar}><FiMenu /></div>
-        <div onClick={doLogout}><FiLogOut /></div>
+    <>
+      <Loader />
+      <div className="chatContainer">
+        <div className="mobileHeader">
+          <div onClick={toggleInfoBar}><FiMenu /></div>
+          <div onClick={doLogout}><FiLogOut /></div>
+        </div>
+        {showInfoBar ? (<InfoBar room={room} users={users} />) : null}
+        <Messages messages={messages} name={name} />
+        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
-      {showInfoBar ? (<InfoBar room={room} users={users} />) : null}
-      <Messages messages={messages} name={name} />
-      <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-    </div>
+    </>
   );
 }
 
